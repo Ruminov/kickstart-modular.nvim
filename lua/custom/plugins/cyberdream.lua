@@ -17,7 +17,7 @@ return {
         terminal_colors = true,
 
         -- Improve start up time by caching highlights. Generate cache with :CyberdreamBuildCache and clear with :CyberdreamClearCache
-        cache = true,
+        cache = false,
 
         -- Override a highlight group entirely using the built-in colour palette
         overrides = function(colors) -- NOTE: This function nullifies the `highlights` option
@@ -32,24 +32,24 @@ return {
             Function = { fg = colors.yellow },
             Boolean = { fg = colors.pink },
             Identifier = { fg = colors.blue },
+            -- LineNR = { fg = '#676767' },
           }
         end,
 
         colors = {
-          dark = {
-            bg_highlight = '#373737',
-            fg = '#E5E5E5',
-            grey = '#828282',
-            blue = '#48CBFF',
-            cyan = '#67F0E7',
-            green = '#80EE6A',
-            red = '#FF2727',
-            yellow = '#FFD059',
-            magenta = '#D575D6',
-            orange = '#F67400',
-            pink = '#FF6BA8',
-            purple = '#A368E4',
-          },
+          bg_highlight = '#353535',
+          fg = '#E5E5E5',
+          grey = '#828282',
+          blue = '#48CBFF',
+          cyan = '#67F0E7',
+          green = '#80EE6A',
+          red = '#FF2727',
+          yellow = '#FFD059',
+          magenta = '#D575D6',
+          orange = '#F28B2C',
+          pink = '#FF6BA8',
+          purple = '#A368E4',
+          dark = {},
         },
       }
 
