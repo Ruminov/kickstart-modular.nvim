@@ -25,6 +25,8 @@ return {
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
+      signcolumn = false, -- Toggle with `:Gitsigns toggle_signs`
+      numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
       on_attach = function(bufnr)
         local gitsigns = require 'gitsigns'
 

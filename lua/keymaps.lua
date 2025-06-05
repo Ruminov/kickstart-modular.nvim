@@ -62,7 +62,14 @@ vim.keymap.set({ 'n', 'v' }, 'd', '"_d', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v' }, 'c', '"_c', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v' }, 'x', '"_x', { noremap = true, silent = true })
 
--- Keymaps from lazyvim
+-- NOTE: Keymaps from lazyvim
+
+-- better up/down
+vim.keymap.set({ 'n', 'x' }, 'j', 'gj', { desc = 'Down', noremap = true, silent = true })
+vim.keymap.set({ 'n', 'x' }, '<Down>', 'gj', { desc = 'Down', noremap = true, silent = true })
+vim.keymap.set({ 'n', 'x' }, 'k', 'gk', { desc = 'Up', noremap = true, silent = true })
+vim.keymap.set({ 'n', 'x' }, '<Up>', 'gk', { desc = 'Up', noremap = true, silent = true })
+
 -- Move Lines
 vim.keymap.set('n', '<A-j>', "<cmd>execute 'move .+' . v:count1<cr>==", { desc = 'Move Down' })
 vim.keymap.set('n', '<A-k>', "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = 'Move Up' })
