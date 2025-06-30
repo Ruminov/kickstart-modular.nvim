@@ -4,6 +4,18 @@ return {
     'folke/todo-comments.nvim',
     event = 'VimEnter',
     dependencies = { 'nvim-lua/plenary.nvim' },
+    keys = {
+      { '<leader>tt', 'OTODO: <Esc><Cmd>normal gcc<CR>A <Left>', desc = 'Add todo comment', mode = 'n' },
+      { '<leader>tn', 'ONOTE: <Esc><Cmd>normal gcc<CR>A <Left>', desc = 'Add note comment', mode = 'n' },
+      { '<leader>tf', 'OFIX: <Esc><Cmd>normal gcc<CR>A <Left>', desc = 'Add fix comment', mode = 'n' },
+      { '<leader>tw', 'OWARNING: <Esc><Cmd>normal gcc<CR>A <Left>', desc = 'Add warning comment', mode = 'n' },
+      { '<leader>tr', 'OREFACTOR:<Esc><Cmd>normal gcc<CR>53A▽<Esc>Vypf▽53r△', desc = 'Add refactor comment', mode = 'n' },
+      { '<leader>td', 'ODEBUG:<Esc><Cmd>normal gcc<CR>53A▽<Esc>Vypf▽53r△', desc = 'Add debug comment', mode = 'n' },
+      { '<leader>te', 'OFEAT:<Esc><Cmd>normal gcc<CR>53A▽<Esc>Vypf▽53r△', desc = 'Add feat comment', mode = 'n' },
+      { '<leader>ts', 'OTEST:<Esc><Cmd>normal gcc<CR>53A▽<Esc>Vypf▽53r△', desc = 'Add test comment', mode = 'n' },
+      { '<leader>tx', 'OEXPERIMENT:<Esc><Cmd>normal gcc<CR>53A▽<Esc>Vypf▽53r△', desc = 'Add test comment', mode = 'n' },
+    },
+
     opts = {
       signs = false,
       gui_style = {
@@ -12,16 +24,41 @@ return {
       },
       highlight = {
         multiline = false, -- enable multine todo comments
-        keyword = 'wide', -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
+        keyword = 'fg', -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
         after = 'fg', -- "fg" or "bg" or empty
         comments_only = true, -- uses treesitter to match keywords in comments only
         exclude = {}, -- list of file types to exclude highlighting
       },
+
       colors = {
-        generic = { '#828282' },
+        fix = { 'SourceRed' },
+        todo = { 'SourcePink' },
+        warning = { 'SourceOrange' },
+        test = { 'cyan-fg-200' },
+        default = { 'gray-fg-100' },
       },
+
       keywords = {
-        NOTE = { color = 'generic' },
+        -- Todocomments purpose: Repair, Improve, Create, Inform, Review
+        -- Repair: FIX, DEBUG
+        -- Improve: TODO, REFACTOR
+        -- Create: TODO, FEAT
+        -- Inform: WARNING, NOTE
+        -- Review: TEST
+
+        FIX = { color = 'fix', alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } },
+        DEBUG = { color = 'fix' },
+
+        TODO = { color = 'todo' },
+        FEAT = { color = 'todo' },
+
+        REFACTOR = { color = 'todo' },
+
+        WARNING = { color = 'warning', alt = { 'WARN' } },
+        NOTE = { color = 'warning' },
+
+        TEST = { color = 'test', alt = { 'TESTING', 'PASSED', 'FAILED' } },
+        EXPERIMENT = { color = 'test' },
       },
     },
   },

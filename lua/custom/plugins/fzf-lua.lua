@@ -2,6 +2,7 @@ return {
   {
     'ibhagwan/fzf-lua',
     opts = {},
+    event = 'VeryLazy',
     config = function()
       require('fzf-lua').setup {
         -- defaults = {},
@@ -21,23 +22,23 @@ return {
           treesitter = false,
         },
         fzf_opts = {
-          ['--pointer'] = '>', -- change the pink arrow to something else or remove it
+          ['--pointer'] = '$', -- change the pink arrow to something else or remove it
           -- ['--marker'] = 'X', -- optional: change the multi-select marker
         },
         fzf_colors = {
           true, -- inherit fzf colors that aren't specified below from
           -- the auto-generated theme similar to `fzf_colors=true`
-          ['fg'] = { 'fg', 'Comment' },
-          ['bg'] = { 'bg', 'Normal' },
-          ['hl'] = { 'fg', 'LazySpecial' },
-          ['fg+'] = { 'fg', { 'Normal' }, 'regular' },
-          ['bg+'] = { 'bg', 'CursorLine' },
-          ['hl+'] = { 'fg', { 'LazySpecial' }, 'regular' },
-          ['info'] = { 'fg', 'StatusLineNC' },
+          ['fg'] = { 'fg', 'gray-fg-100' },
+          -- ['bg'] = { 'bg', 'Normal' },
+          ['hl'] = { 'fg', 'SourceBlue' },
+          ['fg+'] = { 'fg', { 'SourceWhite' }, 'regular' },
+          ['bg+'] = { 'bg', 'gray-bg-400' },
+          ['hl+'] = { 'fg', { 'SourceBlue' }, 'regular' },
+          ['info'] = { 'fg', 'gray-fg-100' },
           ['prompt'] = { 'fg', { 'Normal' }, 'regular' },
-          ['pointer'] = { 'fg', 'LazySpecial' },
+          ['pointer'] = { 'fg', 'SourcePrompt' },
           ['marker'] = { 'fg', 'Keyword' },
-          ['spinner'] = { 'fg', 'LazySpecial' },
+          ['spinner'] = { 'fg', 'SourceBlue' },
           ['header'] = { 'fg', 'Comment' },
           ['query'] = { 'fg', { 'Normal' }, 'regular' },
           ['gutter'] = '-1',
@@ -109,16 +110,27 @@ return {
 
       -- See `:help telescope.builtin`
       local builtin = require 'fzf-lua'
-      vim.keymap.set('n', '<leader>sh', builtin.highlights, { desc = '[S]earch [H]elp' })
-      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.files, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-      vim.keymap.set('n', '<leader>sw', builtin.grep_cword, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sg', builtin.live_grep_native, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<leader>sd', builtin.diagnostics_document, { desc = '[S]earch [D]iagnostics' })
-      vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-      vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      local key = vim.keymap.set
+      key('n', '<leader>sh', builtin.highlights, { desc = '[S]earch [H]ighlights' })
+      key('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+      key('n', '<leader>sf', builtin.files, { desc = '[S]earch [F]iles' })
+      key('n', '<leader>ss', builtin.lsp_document_symbols, { desc = '[S]earch LSP [S]ymbols' })
+      key('n', '<leader>S', builtin.builtin, { desc = '[S]earch [B]uiltin' })
+      key('n', '<leader>sw', builtin.grep_cword, { desc = '[S]earch current [W]ord' })
+      key('n', '<leader>sg', builtin.live_grep_native, { desc = '[S]earch [T]ext with [G]rep' })
+      key('n', '<leader>sd', builtin.diagnostics_document, { desc = '[S]earch [D]iagnostics' })
+      key('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
+      key('n', '<leader>so', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+      key('n', '<leader>sb', builtin.buffers, { desc = '[S]earch existing buffers' })
+      key('n', '<leader>st', function()
+        builtin.grep { search = [[\b(TODO|FIX):]], no_esc = true }
+      end, { desc = 'fzf-lua grep TODO/FIX tags' })
+      key('n', '<leader>sT', function()
+        builtin.grep { search = [[\b(REFACTOR|FEAT|DEBUG):]], no_esc = true }
+      end, { desc = 'fzf-lua grep TODO/FIX tags' })
+      key('n', '<leader>sx', function()
+        builtin.grep { search = [[\b(TEST|EXPERIMENT):]], no_esc = true }
+      end, { desc = 'fzf-lua grep TODO/FIX tags' })
     end,
   },
 }

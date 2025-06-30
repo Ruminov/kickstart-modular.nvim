@@ -6,6 +6,12 @@ return {
       -- scope = "cwd",
       scope = 'git',
       icons = false, -- setting to "true" requires "nvim-web-devicons"
+      -- style = 'basename',
+      command = function(path)
+        if vim.api.nvim_buf_get_name(0) ~= path then
+          vim.cmd.edit(path)
+        end
+      end,
       win_opts = {
         -- Can be fractional
         width = 55,
@@ -15,8 +21,6 @@ return {
 
         relative = 'editor',
         border = 'single',
-        -- focusable = false,
-        focusable = true,
         style = 'minimal',
 
         title = 'Grapple', -- fallback title for Grapple windows
@@ -30,8 +34,8 @@ return {
     cmd = 'Grapple',
     event = { 'BufReadPost', 'BufNewFile' },
     keys = {
-      { '<Tab>', '<cmd>Grapple toggle_tags<cr>', desc = 'Grapple open tags window' },
-      { '<leader><Tab>', '<cmd>Grapple toggle<cr>', desc = 'Grapple toggle tag' },
+      { 'ñ', '<cmd>Grapple toggle_tags<cr>', desc = 'Grapple open tags window' },
+      { '<leader>ñ', '<cmd>Grapple toggle<cr>', desc = 'Grapple toggle tag' },
       { '<leader>j', '<cmd>Grapple select index=1<cr>', desc = 'Select first tag' },
       { '<leader>k', '<cmd>Grapple select index=2<cr>', desc = 'Select second tag' },
       { '<leader>l', '<cmd>Grapple select index=3<cr>', desc = 'Select third tag' },

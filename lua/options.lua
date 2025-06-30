@@ -39,8 +39,12 @@ vim.o.signcolumn = 'no'
 -- Decrease update time
 vim.o.updatetime = 250
 
--- Decrease mapped sequence wait time
-vim.o.timeoutlen = 300
+-- TEST:▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽
+-- yazi.nvim floating window has a delay to trigger esc key
+-- Decrease mapped sequence wait time to reduce delay
+-- WARNING: Less wait time could break keymaps
+vim.o.timeoutlen = 50 -- 300
+-- TEST:△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△
 
 -- Configure how new splits should be opened
 vim.o.splitright = true
@@ -72,6 +76,7 @@ vim.o.scrolloff = 10
 vim.o.confirm = true
 vim.o.termguicolors = true
 
-vim.o.laststatus = 3
+-- Turn status bar global
+-- vim.o.laststatus = 3
 
 -- vim: ts=2 sts=2 sw=2 et

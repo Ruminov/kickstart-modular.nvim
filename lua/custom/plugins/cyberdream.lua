@@ -28,7 +28,7 @@ return {
             Keyword = { fg = colors.pink },
             Number = { fg = colors.purple },
             Operator = { fg = colors.fg },
-            Special = { fg = colors.fg },
+            -- Special = { fg = colors.fg },
             Function = { fg = colors.yellow },
             Boolean = { fg = colors.pink },
             Identifier = { fg = colors.blue },
