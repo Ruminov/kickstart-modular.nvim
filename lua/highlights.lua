@@ -1,10 +1,10 @@
 local hl = vim.api.nvim_set_hl
+-- HL for nvim background: Normal, NormalNC (inactive window)
 
 -- Custom highlight groups
 -- foreground
 hl(0, 'TrackHL', { fg = '#FF0000', bg = '#00FF00' })
-hl(0, 'SourcePrompt', { fg = '#00AFFF' })
-hl(0, 'gray-fg-500', { fg = '#1c1c1c' })
+hl(0, 'SourcePrompt', { fg = '#00AFFF', bg = '#353535' })
 hl(0, 'SourceBlue', { fg = '#48CBFF' })
 hl(0, 'SourceRed', { fg = '#FE3B3B' })
 hl(0, 'SourcePink', { fg = '#FF6BA8' })
@@ -24,7 +24,7 @@ hl(0, 'gray-fg-500', { fg = '#1C1C1C' })
 hl(0, 'gray-bg-100', { bg = '#828282' })
 hl(0, 'gray-bg-200', { bg = '#676767' })
 hl(0, 'gray-bg-300', { bg = '#555555' })
-hl(0, 'gray-bg-400', { fg = '#353535' })
+hl(0, 'gray-bg-400', { bg = '#353535' })
 
 -- Background transparent for the float windows
 hl(0, 'NormalFloat', { fg = 'none', bg = 'none' })
@@ -45,10 +45,6 @@ hl(0, 'Pmenu', { fg = 'none', bg = 'none' })
 hl(0, 'LineNr', { link = 'gray-fg-200' })
 hl(0, 'IncSearch', { fg = 'none', bg = '#555555' })
 
--- Test to fix the neovim background color bleeding
--- hl(0, 'NormalNC', { bg = '#1C1C1C' }) -- Optional: inactive windows
--- hl(0, 'Normal', { bg = '#1C1C1C' }) -- Global default bg
-
 -- Lazy.nvim plugin
 hl(0, 'LazySpecial', { link = 'SourceBlue' })
 hl(0, 'LazyProgressDone', { link = 'SourceGreen' })
@@ -66,6 +62,15 @@ hl(0, 'FzfLuaBorder', { link = 'gray-fg-300' })
 hl(0, 'FzfLuaTitle', { link = 'gray-fg-100' })
 hl(0, 'FzfLuaFzfPrompt', { link = 'SourceWhite' })
 hl(0, 'FzfLuaLivePrompt', { link = 'SourceWhite' })
+
+-- Telescope
+hl(0, 'TelescopePromptTitle', { link = 'gray-fg-100' })
+hl(0, 'TelescopeBorder', { link = 'gray-fg-300' })
+hl(0, 'TelescopePromptPrefix', { link = 'SourceWhite' })
+hl(0, 'TelescopePromptCounter', { link = 'gray-fg-100' })
+hl(0, 'TelescopeSelection', { fg = '#E5E5E5', bg = '#353535' })
+hl(0, 'TelescopeResultsNormal', { link = 'gray-fg-100' })
+hl(0, 'TelescopeSelectionCaret', { link = 'SourcePrompt' })
 
 -- grapple.nvim
 hl(0, 'GrappleTitle', { link = 'gray-fg-100' })

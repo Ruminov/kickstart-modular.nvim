@@ -9,7 +9,6 @@ return {
         -- grep = {
         --   rg_opts = '--column --color=never --line-number --no-heading',
         -- },
-
         winopts = {
           height = 0.70, -- window height
           width = 0.70, -- window width
@@ -43,11 +42,31 @@ return {
           ['query'] = { 'fg', { 'Normal' }, 'regular' },
           ['gutter'] = '-1',
         },
-        files = { hidden = false },
-        helptags = { previewer = 'help_native' },
-        lsp = { lsp = { code_actions = { previer = 'codeaction_native' } } },
-        tags = { previewer = 'bat' },
-        btags = { previewer = 'bat' },
+        buffers = { hidden = false, file_icons = false },
+        files = { hidden = false, file_icons = false },
+        git = {
+          grep = { file_icons = false },
+          status = { file_icons = false },
+          diff = { file_icons = false },
+          hunks = { file_icons = false },
+          commits = { file_icons = false },
+          bcommits = { file_icons = false },
+          blame = { file_icons = false },
+          branches = { file_icons = false },
+          stash = { file_icons = false },
+          icons = { file_icons = false },
+          -- tags = { file_icons = false, previewer = 'bat' },
+        },
+        oldfiles = {
+          file_icons = false,
+          prompt = 'History: ',
+          -- cwd_only = true,
+          -- stat_file = false,
+          -- include_current_session = true,
+        },
+        tags = { file_icons = false, previewer = 'bat' },
+        helptags = { file_icons = false, previewer = 'help_native' },
+        btags = { file_icons = false, previewer = 'bat' },
         -- highlights = { previewer = 'bat' },
         previewers = {
           bat = {
@@ -114,7 +133,8 @@ return {
       key('n', '<leader>sh', builtin.highlights, { desc = '[S]earch [H]ighlights' })
       key('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       key('n', '<leader>sf', builtin.files, { desc = '[S]earch [F]iles' })
-      key('n', '<leader>ss', builtin.lsp_document_symbols, { desc = '[S]earch LSP [S]ymbols' })
+      key('n', '<leader>ss', builtin.git_status, { desc = '[S]earch LSP [S]ymbols' })
+      key('n', '<leader>sy', builtin.lsp_document_symbols, { desc = '[S]earch LSP [S]ymbols' })
       key('n', '<leader>S', builtin.builtin, { desc = '[S]earch [B]uiltin' })
       key('n', '<leader>sw', builtin.grep_cword, { desc = '[S]earch current [W]ord' })
       key('n', '<leader>sg', builtin.live_grep_native, { desc = '[S]earch [T]ext with [G]rep' })
