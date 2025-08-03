@@ -23,13 +23,14 @@ return {
             end
           end,
         },
+
         -- log_level = 'debug',
         enabled = true, -- Enables/disables auto creating, saving and restoring
         root_dir = vim.fn.stdpath 'data' .. '/sessions/', -- Root dir where sessions will be stored
         auto_save = true, -- Enables/disables auto saving session on exit
         auto_restore = true, -- Enables/disables auto restoring session on start
         auto_create = true, -- Enables/disables auto creating new session files. Can take a function that should return true/false if a new session file should be created or not
-        suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+        suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/', '~/adsequi/', '~/code/stockpile/' },
         allowed_dirs = nil, -- Allow session restore/create in certain directories
         auto_restore_last_session = false, -- On startup, loads the last saved session if session for cwd does not exist
         git_use_branch_name = true, -- Include git branch name in session name
@@ -41,7 +42,10 @@ return {
         continue_restore_on_error = true, -- Keep loading the session even if there's an error
         show_auto_restore_notif = true, -- Whether to show a notification when auto-restoring
         cwd_change_handling = true, -- Follow cwd changes, saving a session before change and restoring after
-        lsp_stop_on_restore = false, -- Should language servers be stopped when restoring a session. Can also be a function that will be called if set. Not called on autorestore from startup
+        -- WARNING: It could potentially break LSP
+        -- TEST:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+        lsp_stop_on_restore = true, -- Should language servers be stopped when restoring a session. Can also be a function that will be called if set. Not called on autorestore from startup
+        -- TEST://///////////////////////////////////////////////////
         restore_error_handler = nil, -- Called when there's an error restoring. By default, it ignores fold errors otherwise it displays the error and returns false to disable auto_save
         purge_after_minutes = nil, -- Sessions older than purge_after_minutes will be deleted asynchronously on startup, e.g. set to 14400 to delete sessions that haven't been accessed for more than 10 days, defaults to off (no purging), requires >= nvim 0.10
         log_level = 'error', -- Sets the log level of the plugin (debug, info, warn, error).

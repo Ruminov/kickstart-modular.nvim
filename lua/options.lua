@@ -3,17 +3,55 @@
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
--- Make line numbers default
+-- REFACTOR:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+-- Basic
 vim.o.number = true
--- You can also add relative line numbers, to help with jumping.
---  Experiment for yourself to see if you like it!
--- vim.o.relativenumber = true
+vim.o.relativenumber = false
+vim.o.cursorline = false
+vim.o.wrap = true
+vim.o.scrolloff = 4 -- 10
+-- vim.o.sidescrolloff = 8
+
+-- EXPERIMENT:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+-- Indentation
+-- Test if 2 is too cramped
+-- I personally prefer 4
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.softtabstop = 2
+vim.o.expandtab = true
+vim.o.smartindent = true
+vim.o.autoindent = true
+-- EXPERIMENT://///////////////////////////////////////////////////
+
+-- Search
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.hlsearch = true
+vim.o.incsearch = true
+
+-- Visual
+vim.o.termguicolors = true
+vim.o.signcolumn = 'yes'
+-- WARNING: It could potentially break the UI
+vim.o.cmdheight = 1 -- 1
+-- WARNING: I don't know what this does
+-- vim.o.completeopt = 'menuone,noinsert,noselect'
+vim.o.showmode = false
+
+-- File handling
+-- EXPERIMENT:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+-- vim.o.backup = false
+-- vim.o.writebackup = false
+-- vim.o.swapfile = false
+-- vim.o.autowrite = false
+vim.o.undofile = true
+vim.o.autoread = true
+-- EXPERIMENT://///////////////////////////////////////////////////
+-- REFACTOR://///////////////////////////////////////////////////
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
-
--- Don't show the mode, since it's already in the status line
-vim.o.showmode = false
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
@@ -25,16 +63,6 @@ end)
 
 -- Enable break indent
 vim.o.breakindent = true
-
--- Save undo history
-vim.o.undofile = true
-
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-vim.o.ignorecase = true
-vim.o.smartcase = true
-
--- Keep signcolumn on by default
-vim.o.signcolumn = 'no'
 
 -- Decrease update time
 vim.o.updatetime = 250
@@ -62,17 +90,12 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 -- Preview substitutions live, as you type!
 vim.o.inccommand = 'split'
 
--- Show which line your cursor is on
-vim.o.cursorline = false
-
--- Minimal number of screen lines to keep above and below the cursor.
-vim.o.scrolloff = 10
-
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
 -- See `:help 'confirm'`
 vim.o.confirm = true
-vim.o.termguicolors = true
+
+vim.o.showcmd = false
 
 -- Turn status bar global
 -- vim.o.laststatus = 3

@@ -9,13 +9,45 @@ return {
       { '<leader>tn', 'ONOTE: <Esc><Cmd>normal gcc<CR>A <Left>', desc = 'Add note comment', mode = 'n' },
       { '<leader>tf', 'OFIX: <Esc><Cmd>normal gcc<CR>A <Left>', desc = 'Add fix comment', mode = 'n' },
       { '<leader>tw', 'OWARNING: <Esc><Cmd>normal gcc<CR>A <Left>', desc = 'Add warning comment', mode = 'n' },
-      { '<leader>tr', 'OREFACTOR:<Esc><Cmd>normal gcc<CR>53A\\<Esc>Vypf\\53r/', desc = 'Add refactor comment', mode = 'n' },
-      { '<leader>td', 'ODEBUG:<Esc><Cmd>normal gcc<CR>53A\\<Esc>Vypf\\53r/', desc = 'Add debug comment', mode = 'n' },
-      { '<leader>te', 'OFEAT:<Esc><Cmd>normal gcc<CR>53A\\<Esc>Vypf\\53r/', desc = 'Add feat comment', mode = 'n' },
-      { '<leader>ts', 'OTEST:<Esc><Cmd>normal gcc<CR>53A\\<Esc>Vypf\\53r/', desc = 'Add test comment', mode = 'n' },
-      { '<leader>tx', 'OEXPERIMENT:<Esc><Cmd>normal gcc<CR>53A\\<Esc>Vypf\\53r/', desc = 'Add test comment', mode = 'n' },
+      -- TEST:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+      {
+        '<leader>tr',
+        'OREFACTOR://///////////////////////////////////////////////////<Esc>.vblr\\Vj<Cmd>normal gcc<CR>',
+        desc = 'Add refactor comment',
+        mode = 'n',
+      },
+      {
+        '<leader>td',
+        'ODEBUG://///////////////////////////////////////////////////<Esc>.vblr\\Vj<Cmd>normal gcc<CR>',
+        desc = 'Add debug comment',
+        mode = 'n',
+      },
+      {
+        '<leader>te',
+        'OFEAT://///////////////////////////////////////////////////<Esc>.vblr\\Vj<Cmd>normal gcc<CR>',
+        desc = 'Add feat comment',
+        mode = 'n',
+      },
+      {
+        '<leader>ts',
+        'OTEST://///////////////////////////////////////////////////<Esc>.vblr\\Vj<Cmd>normal gcc<CR>',
+        desc = 'Add test comment',
+        mode = 'n',
+      },
+      {
+        '<leader>tx',
+        'OEXPERIMENT://///////////////////////////////////////////////////<Esc>.vblr\\Vj<Cmd>normal gcc<CR>',
+        desc = 'Add experiment comment',
+        mode = 'n',
+      },
+      -- previous iteration ↓
+      -- { '<leader>tr', 'OREFACTOR:<Esc><Cmd>normal gcc<CR>53A\\<Esc>Vypf\\53r/', desc = 'Add refactor comment', mode = 'n' },
+      -- { '<leader>td', 'ODEBUG:<Esc><Cmd>normal gcc<CR>53A\\<Esc>Vypf\\53r/', desc = 'Add debug comment', mode = 'n' },
+      -- { '<leader>te', 'OFEAT:<Esc><Cmd>normal gcc<CR>53A\\<Esc>Vypf\\53r/', desc = 'Add feat comment', mode = 'n' },
+      -- { '<leader>ts', 'OTEST:<Esc><Cmd>normal gcc<CR>53A\\<Esc>Vypf\\53r/', desc = 'Add test comment', mode = 'n' },
+      -- { '<leader>tx', 'OEXPERIMENT:<Esc><Cmd>normal gcc<CR>53A\\<Esc>Vypf\\53r/', desc = 'Add test comment', mode = 'n' },
+      -- TEST://///////////////////////////////////////////////////
     },
-
     opts = {
       signs = false,
       gui_style = {

@@ -1,7 +1,7 @@
 return {
   {
     'mikavilpas/yazi.nvim',
-    -- event = 'VeryLazy',
+    event = 'VeryLazy',
     keys = {
       -- 👇 in this section, choose your own keymappings!
       {
@@ -25,9 +25,10 @@ return {
 
     opts = {
       -- if you want to open yazi instead of netrw, see below for more info
-      open_for_directories = true,
+      open_for_directories = false,
       -- REFACTOR:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
       floating_window_scaling_factor = 1.0,
+      -- floating_window_scaling_factor = 0.99,
       yazi_floating_window_border = 'none',
       yazi_floating_window_zindex = 200,
       -- REFACTOR://///////////////////////////////////////////////////

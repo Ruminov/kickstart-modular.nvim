@@ -10,6 +10,7 @@ return {
         --   rg_opts = '--column --color=never --line-number --no-heading',
         -- },
         winopts = {
+          -- backdrop = 100,
           height = 0.70, -- window height
           width = 0.70, -- window width
           border = 'single',
@@ -103,6 +104,10 @@ return {
             ['<S-Left>'] = 'preview-reset',
             ['<A-j>'] = 'preview-page-down',
             ['<A-k>'] = 'preview-page-up',
+            -- TODO: Add this keymap when the plugin provides more support
+            -- FEAT:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+            -- ['<A-w>'] = 'focus-preview',
+            -- FEAT://///////////////////////////////////////////////////
             ['<M-S-down>'] = 'preview-down',
             ['<M-S-up>'] = 'preview-up',
           },
