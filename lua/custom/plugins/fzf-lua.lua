@@ -10,10 +10,10 @@ return {
         --   rg_opts = '--column --color=never --line-number --no-heading',
         -- },
         winopts = {
-          -- backdrop = 100,
-          height = 0.70, -- window height
-          width = 0.70, -- window width
-          border = 'single',
+          height = 1.0, -- 0.70
+          width = 1.0, -- 0.70
+          -- border = 'none', -- single
+          border = false,
           preview = {
             default = 'bat',
             hidden = true,
@@ -24,6 +24,8 @@ return {
         fzf_opts = {
           ['--pointer'] = '$', -- change the pink arrow to something else or remove it
           -- ['--marker'] = 'X', -- optional: change the multi-select marker
+          ['--gutter'] = ' ',
+          -- ['--no-scrollbar'] = '',
         },
         fzf_colors = {
           true, -- inherit fzf colors that aren't specified below from
@@ -41,7 +43,6 @@ return {
           ['spinner'] = { 'fg', 'SourceBlue' },
           ['header'] = { 'fg', 'Comment' },
           ['query'] = { 'fg', { 'Normal' }, 'regular' },
-          ['gutter'] = '-1',
         },
         buffers = { hidden = false, file_icons = false },
         files = { hidden = false, file_icons = false },
@@ -58,6 +59,9 @@ return {
           icons = { file_icons = false },
           -- tags = { file_icons = false, previewer = 'bat' },
         },
+        grep = {
+          file_icons = false,
+        },
         oldfiles = {
           file_icons = false,
           prompt = 'History: ',
@@ -70,10 +74,15 @@ return {
         btags = { file_icons = false, previewer = 'bat' },
         -- highlights = { previewer = 'bat' },
         previewers = {
+          cat = {
+            cmd = 'cat',
+            args = '-n',
+          },
           bat = {
             cmd = 'bat',
             args = '--style=numbers --color always',
-            theme = 'Coldark-Dark', -- bat preview theme (bat --list-themes)
+            -- theme = 'Coldark-Dark', -- bat preview theme (bat --list-themes)
+            theme = 'Source', -- bat preview theme (bat --list-themes)
             config = nil, -- nil uses $BAT_CONFIG_PATH
           },
           builtin = {
@@ -120,7 +129,7 @@ return {
             ['ctrl-u'] = 'half-page-up',
             ['ctrl-a'] = 'beginning-of-line',
             ['ctrl-e'] = 'end-of-line',
-            ['alt-a'] = 'toggle-all',
+            ['alt-w'] = 'toggle-all',
             ['alt-g'] = 'first',
             ['alt-G'] = 'last',
             -- Only valid with fzf previewers (bat/cat/git/etc)
@@ -151,10 +160,10 @@ return {
         builtin.grep { search = [[\b(TODO|FIX):]], no_esc = true }
       end, { desc = 'fzf-lua grep TODO/FIX tags' })
       key('n', '<leader>sT', function()
-        builtin.grep { search = [[\b(REFACTOR|FEAT|DEBUG):]], no_esc = true }
-      end, { desc = 'fzf-lua grep TODO/FIX tags' })
+        builtin.grep { search = '\\b(REFACTOR|FEAT|DEBUG):[^/]', no_esc = true }
+      end, { desc = 'fzf-lua grep tags' })
       key('n', '<leader>sx', function()
-        builtin.grep { search = [[\b(TEST|EXPERIMENT):]], no_esc = true }
+        builtin.grep { search = '\\b(TEST|EXPERIMENT):[^/]', no_esc = true }
       end, { desc = 'fzf-lua grep TODO/FIX tags' })
     end,
   },

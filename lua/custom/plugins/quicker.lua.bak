@@ -1,0 +1,28 @@
+return {
+  {
+    'stevearc/quicker.nvim',
+    ft = 'qf',
+    ---@module "quicker"
+    ---@type quicker.SetupOptions
+    opts = {},
+    event = 'VeryLazy',
+    config = function()
+      require('quicker').setup {
+        keys = {
+          -- { '>', "<cmd>lua require('quicker').expand()<CR>", desc = 'Expand quickfix content' },
+        },
+        borders = {
+          vert = '│',
+          -- Strong headers separate results from different files
+          strong_header = '━',
+          strong_cross = '╋',
+          strong_end = '┫',
+          -- Soft headers separate results within the same file
+          soft_header = '╌',
+          soft_cross = '╂',
+          soft_end = '┨',
+        },
+      }
+    end,
+  },
+}

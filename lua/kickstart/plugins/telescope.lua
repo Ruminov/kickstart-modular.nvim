@@ -7,7 +7,7 @@ return {
       'nvim-lua/plenary.nvim',
     },
     keys = {
-      { '<leader>p', '<cmd>SessionSearch<cr>', desc = 'Open auto-session picker' },
+      { '<leader>p', '<cmd>AutoSession search<cr>', desc = 'Open auto-session picker' },
     },
     config = function()
       local actions = require 'telescope.actions'

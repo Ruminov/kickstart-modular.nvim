@@ -54,7 +54,7 @@ require('lazy').setup({
   --
   -- EXPERIMENT:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   -- EXPERIMENT://///////////////////////////////////////////////////
   require 'kickstart.plugins.autopairs',

@@ -9,7 +9,9 @@ vim.o.number = true
 vim.o.relativenumber = false
 vim.o.cursorline = false
 vim.o.wrap = true
-vim.o.scrolloff = 4 -- 10
+-- TODO: 298
+-- vim.o.scrolloff = 6 -- 10
+vim.o.scrolloff = 10
 -- vim.o.sidescrolloff = 8
 
 -- EXPERIMENT:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -67,10 +69,14 @@ vim.o.breakindent = true
 -- Decrease update time
 vim.o.updatetime = 250
 
+-- EXPERIMENT:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 -- yazi.nvim floating window has a delay to trigger esc key
 -- Decrease mapped sequence wait time to reduce delay
 -- WARNING: Less wait time could break keymaps
-vim.o.timeoutlen = 50 -- 300
+-- vim.o.timeoutlen = 50 -- 300
+-- vim.o.timeoutlen = 1000 -- 300
+vim.o.timeoutlen = 1000 -- 300
+-- EXPERIMENT://///////////////////////////////////////////////////
 
 -- Configure how new splits should be opened
 vim.o.splitright = true
@@ -98,6 +104,12 @@ vim.o.confirm = true
 vim.o.showcmd = false
 
 -- Turn status bar global
--- vim.o.laststatus = 3
+vim.o.laststatus = 3
+
+-- vim.filetype.add {
+--   extension = {
+--     sot = 'text',
+--   },
+-- }
 
 -- vim: ts=2 sts=2 sw=2 et

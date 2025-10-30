@@ -2,7 +2,9 @@ return {
   {
     'rmagatti/auto-session',
     lazy = false,
-
+    dependencies = {
+      'nvim-telescope/telescope.nvim',
+    },
     config = function()
       require('auto-session').setup {
         pre_save_cmds = {
@@ -24,13 +26,38 @@ return {
           end,
         },
 
+        pre_restore_cmds = {},
+        post_restore_cmds = {
+          function()
+            local path = vim.fn.getcwd() .. '/.sot'
+            if vim.fn.filereadable(path) == 1 then
+              -- load .sot first line to module storage
+              require('custom.modules.sot').parse_first_line_data()
+              -- Populate the qflist if file exist and pattern is available
+              require('custom.modules.sot').populate_qflist()
+            end
+          end,
+        },
+
+        -- Save quickfix list and open it when restoring the session
+        save_extra_cmds = {},
+
         -- log_level = 'debug',
         enabled = true, -- Enables/disables auto creating, saving and restoring
         root_dir = vim.fn.stdpath 'data' .. '/sessions/', -- Root dir where sessions will be stored
         auto_save = true, -- Enables/disables auto saving session on exit
         auto_restore = true, -- Enables/disables auto restoring session on start
         auto_create = true, -- Enables/disables auto creating new session files. Can take a function that should return true/false if a new session file should be created or not
-        suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/', '~/adsequi/', '~/code/stockpile/' },
+        suppressed_dirs = {
+          '~/',
+          '~/Projects',
+          '~/Downloads',
+          '/',
+          '~/adsequi/*',
+          '~/code/syntax/*',
+          '~/code/patterns/*',
+          '~/code/snippets/*',
+        },
         allowed_dirs = nil, -- Allow session restore/create in certain directories
         auto_restore_last_session = false, -- On startup, loads the last saved session if session for cwd does not exist
         git_use_branch_name = true, -- Include git branch name in session name

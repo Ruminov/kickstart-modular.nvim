@@ -7,8 +7,9 @@ local key = vim.keymap.set
 --  See `:help hlsearch`
 key('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Diagnostic keymaps
-key('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- refactor(7958e16): obsolete keymaps to replace/delete
+-- key('n', 'H', '<cmd>cprev<CR>zz', { desc = 'Jumpt to previous loclist item' })
+-- key('n', 'L', '<cmd>cnext<CR>zz', { desc = 'Jumpt to next loclist item' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -16,7 +17,7 @@ key('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]ui
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-key('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+-- key('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
 -- key('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -54,9 +55,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- Don't save deleted text on clipboard
-key({ 'n', 'v' }, 'd', '"_d', { noremap = true, silent = true })
 key({ 'n', 'v' }, 'c', '"_c', { noremap = true, silent = true })
-key({ 'n', 'v' }, 'x', '"_x', { noremap = true, silent = true })
+key({ 'n', 'v' }, 'd', '"_d', { noremap = true, silent = true })
+key({ 'n', 'v' }, 'D', '"_D', { noremap = true, silent = true })
+key('n', 'x', '"_x', { noremap = true, silent = true })
 
 -- NOTE: Keymaps from lazyvim
 
@@ -75,7 +77,15 @@ key('v', '<A-j>', ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc 
 key('v', '<A-k>', ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = 'Move Up' })
 
 -- save file
-key({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
+-- key({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
+key({ 'i', 'x', 'n', 's' }, '<C-s>', function()
+  vim.cmd 'write'
+
+  local path = vim.fn.getcwd() .. '/.sot'
+  if vim.fn.filereadable(path) == 1 then
+    require('custom.modules.sot').populate_qflist()
+  end
+end, { desc = 'Save File' })
 
 -- Keep the selection while indenting
 key('v', '<', '<gv')
@@ -87,6 +97,15 @@ vim.keymap.del('n', 'gc')
 -- commenting
 key('n', 'gco', 'o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>', { desc = 'Add Comment Below' })
 key('n', 'gcO', 'O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>', { desc = 'Add Comment Above' })
+
+-- UI config
+-- EXPERIMENT:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+key('n', '<leader>ud', '<cmd>lua vim.diagnostic.config({virtual_text=false})<CR>', { desc = 'Disable text diagnostics' })
+key('n', '<leader>ue', '<cmd>lua vim.diagnostic.config({virtual_text=true})<CR>', { desc = 'Enable text diagnostics' })
+key('n', '<leader>ut', function()
+  require('tiny-inline-diagnostic').toggle()
+end, { desc = 'Toggle tiny inline diagnostics' })
+-- experiment://///////////////////////////////////////////////////
 
 -- Resize window using <ctrl> arrow keys
 key('n', '<C-Up>', '<cmd>resize +2<cr>', { desc = 'Increase Window Height' })
@@ -114,5 +133,27 @@ end, { desc = 'grug-far: Search the current word under cursor' })
 key({ 'n', 'x' }, '<leader>gv', function()
   require('grug-far').open { visualSelectionUsage = 'operate-within-range' }
 end, { desc = 'grug-far: Search within range' })
+
+-- USER KEYMAPS
+
+key('n', 'vv', 'viw', { noremap = true, silent = true })
+
+-- TEST:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+-- Duplicate a line and comment out the first line
+key('n', 'yc', 'yygccp', { remap = true })
+
+key('v', '<leader>yc', 'ygvgc`>p', { remap = true, desc = '[C]opy to a comment above' })
+
+-- key('n', '<C-c>', 'ciw')
+key('n', '<C-c>', '"_ciw', { noremap = true, silent = true })
+key('n', '<C-n>', vim.lsp.buf.rename)
+
+-- TEST://///////////////////////////////////////////////////
+
+-- Code runner
+key('n', '<leader>or', '<cmd>ReactiveRunner<CR>', { desc = 'Open reactive runner for current file' })
+
+-- .sot
+key({ 'n', 'x' }, '<leader>k', require('custom.modules.sot').open_sot, { desc = 'Toggle .sot file' })
 
 -- vim: ts=2 sts=2 sw=2 et

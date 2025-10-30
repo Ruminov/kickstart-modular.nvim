@@ -6,7 +6,15 @@ return {
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
-        markdown = { 'markdownlint' },
+        -- REFACTOR:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+        -- I disable it, uncomment if you want linter for markdown markdown files
+        -- markdown = { 'markdownlint-cli2' },
+
+        -- REFACTOR://///////////////////////////////////////////////////
+        -- TEST:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+        -- Is this python linter useful?
+        python = { 'ruff' },
+        -- TEST://///////////////////////////////////////////////////
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,

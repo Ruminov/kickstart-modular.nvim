@@ -1,0 +1,124 @@
+local M = {}
+
+-- Track the floating window id
+M.winid = nil
+
+function M.create_sot(path)
+  vim.fn.writefile({ '' }, path)
+  print('.sot has been created at ' .. path)
+end
+
+-- Helper: save the buffer and close the window
+-- TODO:237 move current line to first line
+local function save_and_close(buf, win)
+  if vim.api.nvim_buf_is_valid(buf) then
+    -- Only write if the buffer has been modified
+    if vim.bo[buf].modified then
+      vim.api.nvim_buf_call(buf, function()
+        vim.cmd 'silent! write'
+      end)
+    end
+  end
+
+  if vim.api.nvim_win_is_valid(win) then
+    -- TODO(0000793): hide instead of closing
+    vim.api.nvim_win_close(win, true)
+  end
+
+  M.winid = nil
+end
+
+-- TODO(0000154): create module to get first line data
+-- FEAT:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+function M.get_line_data(path)
+  local first_line = vim.fn.readfile(path, '', 1)[1]
+  local description = first_line and first_line:match '^%s*(.-)%s*||' or ''
+  -- local pattern = first_line and first_line:match '^(.-)||' or ''
+  local pattern = first_line and first_line:match '||%s*(.-)%s*||' or ''
+  local id = first_line and first_line:match '||.*||%s*(.-)%s*$' or ''
+  return { description, pattern, id }
+end
+-- FEAT://///////////////////////////////////////////////////
+
+function M.populate_qflist(path)
+  -- Get pattern from .sot first line
+  local pattern = M.get_line_data(path)[2]
+  -- If pattern exist, populate quickfix list
+  if pattern and pattern ~= '' then
+    local cmd = { 'rg', '--vimgrep', '--sort=path', pattern, '.' }
+    local output = vim.fn.systemlist(cmd)
+    vim.fn.setqflist({}, 'r', { lines = output })
+  end
+end
+
+function M.open_sot()
+  -- Create .sot if file doesn't exist
+  local sot_path = vim.fn.getcwd() .. '/.sot'
+  if vim.fn.filereadable(sot_path) == 0 then
+    -- TODO(0000793):
+    M.create_sot(sot_path)
+    return
+  end
+
+  -- Toggle: if window is already opened, save & close it
+  if M.winid and vim.api.nvim_win_is_valid(M.winid) then
+    local win = M.winid
+    local buf = vim.api.nvim_win_get_buf(win)
+    save_and_close(buf, win)
+    return
+  end
+
+  -- Otherwise, open it
+  local buf = vim.fn.bufadd(sot_path)
+  vim.fn.bufload(buf)
+
+  local width = vim.o.columns
+  local height = vim.o.lines - 2
+  local row = math.floor((vim.o.lines - height) / 2) - 1
+  local col = math.floor((vim.o.columns - width) / 2)
+
+  local win = vim.api.nvim_open_win(buf, true, {
+    relative = 'editor',
+    width = width,
+    height = height,
+    row = row,
+    col = col,
+    style = 'minimal',
+    border = 'none',
+  })
+
+  M.winid = win
+
+  -- 1. Map "q" to save & close (buffer-local)
+  vim.keymap.set('n', 'q', function()
+    save_and_close(buf, win)
+  end, { buffer = buf, nowait = true, silent = true, desc = 'Close .sot window' })
+
+  vim.keymap.set('n', '<A-g>', 'VxggP', { buffer = buf, silent = true })
+
+  -- 2. Close automatically if focus leaves the window
+  vim.api.nvim_create_autocmd('WinLeave', {
+    buffer = buf,
+    once = true,
+    callback = function()
+      save_and_close(buf, win)
+    end,
+  })
+
+  -- make moving line keymaps usable in the floating window
+  vim.keymap.set('n', '<A-j>', "<cmd>execute 'move .+' . v:count1<cr>", { desc = 'Move Down', buffer = buf })
+  vim.keymap.set('n', '<A-k>', "<cmd>execute 'move .-' . (v:count1 + 1)<cr>", { desc = 'Move Up', buffer = buf })
+  vim.keymap.set('i', '<A-j>', '<esc><cmd>m .+1<cr>gi', { desc = 'Move Down', buffer = buf })
+  vim.keymap.set('i', '<A-k>', '<esc><cmd>m .-2<cr>gi', { desc = 'Move Up', buffer = buf })
+  vim.keymap.set('v', '<A-j>', ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gvgv", { desc = 'Move Down', buffer = buf })
+  vim.keymap.set('v', '<A-k>', ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gvgv", { desc = 'Move Up', buffer = buf })
+  -- TODO(0000154): test password generator snippet
+  vim.keymap.set('n', '<leader>ñ', function()
+    vim.system({ 'uuidgen' }, { text = true }, function(obj)
+      local output = string.sub(obj.stdout, 1, 7)
+      print(output)
+    end)
+  end, { buffer = buf, desc = 'Toggle .sot file' })
+end
+
+return M

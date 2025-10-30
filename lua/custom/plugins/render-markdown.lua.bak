@@ -415,8 +415,6 @@ return {
             -- Highlight for item associated with unchecked checkbox.
             scope_highlight = 'SourceRed',
           },
-          -- TODO: Strikethrough only for associated item
-          -- REFACTOR:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
           checked = {
             -- Replaces '[x]' of 'task_list_marker_checked'.
             icon = '󰱒 ',
@@ -425,7 +423,6 @@ return {
             -- Highlight for item associated with checked checkbox.
             scope_highlight = '@markup.list.checked',
             -- Define custom checkbox states, more involved, not part of the markdown grammar.
-            -- REFACTOR://///////////////////////////////////////////////////
           },
         -- As a result this requires neovim >= 0.10.0 since it relies on 'inline' extmarks.
         -- The key is for healthcheck and to allow users to change its values, value type below.

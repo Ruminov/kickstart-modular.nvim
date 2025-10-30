@@ -228,6 +228,16 @@ return {
       local servers = {
         html = {}, -- HTML language server
         cssls = {}, -- CSS
+        basedpyright = {
+          settings = {
+            basedpyright = {
+              analysis = {
+                typeCheckingMode = 'basic',
+              },
+            },
+          },
+        },
+        ruff = {},
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
@@ -239,6 +249,9 @@ return {
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         ts_ls = {},
+        emmet_language_server = {
+          filetypes = { 'css', 'eruby', 'html', 'javascript', 'javascriptreact', 'less', 'sass', 'scss', 'pug', 'typescriptreact' },
+        },
         --
 
         lua_ls = {
@@ -290,6 +303,8 @@ return {
           end,
         },
       }
+      -- Disable inline diagnostic hints, it will be replaced by tiny-inline-diagnostic plugin
+      vim.diagnostic.config { virtual_text = false }
     end,
   },
 }

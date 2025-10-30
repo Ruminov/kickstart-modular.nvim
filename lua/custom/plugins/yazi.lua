@@ -12,7 +12,8 @@ return {
       },
       {
         -- Open in the current working directory
-        '<leader><leader>',
+        -- '<cmd>Yazi cwd<cr>',
+        '<leader>e',
         '<cmd>Yazi cwd<cr>',
         desc = "Open the file manager in nvim's working directory",
       },
@@ -29,12 +30,21 @@ return {
       -- REFACTOR:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
       floating_window_scaling_factor = 1.0,
       -- floating_window_scaling_factor = 0.99,
-      yazi_floating_window_border = 'none',
-      yazi_floating_window_zindex = 200,
+      yazi_floating_window_border = 'solid',
+      -- yazi_floating_window_zindex = 51,
+
+      -- EXPERIMENT:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+      -- the zindex of the yazi floating window. Can be used to make the yazi
+      -- window fullscreen. See `:h nvim_open_win()` for more information.
+      -- EXPERIMENT://///////////////////////////////////////////////////
       -- REFACTOR://///////////////////////////////////////////////////
       keymaps = {
         show_help = '<f1>',
+        open_file_in_vertical_split = '<c-v>',
+        open_file_in_horizontal_split = '<c-s>',
+        grep_in_directory = '<c-z>',
       },
+
       integrations = {
         grep_in_directory = 'fzf-lua',
         grep_in_selected_files = 'fzf-lua',
