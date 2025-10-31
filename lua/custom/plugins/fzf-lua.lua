@@ -13,7 +13,8 @@ return {
           height = 1.0, -- 0.70
           width = 1.0, -- 0.70
           -- border = 'none', -- single
-          border = false,
+          -- border = false,
+          border = 'none',
           preview = {
             default = 'bat',
             hidden = true,
@@ -24,8 +25,13 @@ return {
         fzf_opts = {
           ['--pointer'] = '$', -- change the pink arrow to something else or remove it
           -- ['--marker'] = 'X', -- optional: change the multi-select marker
+          -- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+          ['--no-separator'] = true,
+          -- optional: hide the "x/y" info line at the bottom
+          -- ['--info'] = 'hidden',
+          -- /////////////////////////////////////////////////////
           ['--gutter'] = ' ',
-          -- ['--no-scrollbar'] = '',
+          ['--no-scrollbar'] = '',
         },
         fzf_colors = {
           true, -- inherit fzf colors that aren't specified below from
@@ -142,8 +148,10 @@ return {
       }
 
       -- See `:help telescope.builtin`
-      local builtin = require 'fzf-lua'
       local key = vim.keymap.set
+      local builtin = require 'fzf-lua'
+
+      key('n', '<leader>p', require('auto-session').search, { desc = 'Open auto-session picker' })
       key('n', '<leader>sh', builtin.highlights, { desc = '[S]earch [H]ighlights' })
       key('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       key('n', '<leader>sf', builtin.files, { desc = '[S]earch [F]iles' })
@@ -156,6 +164,8 @@ return {
       key('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       key('n', '<leader>so', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       key('n', '<leader>sb', builtin.buffers, { desc = '[S]earch existing buffers' })
+
+      -- todo comments grep
       key('n', '<leader>st', function()
         builtin.grep { search = [[\b(TODO|FIX):]], no_esc = true }
       end, { desc = 'fzf-lua grep TODO/FIX tags' })

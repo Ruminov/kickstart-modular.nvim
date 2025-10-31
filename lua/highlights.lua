@@ -77,17 +77,6 @@ hl(0, 'FzfLuaFzfPrompt', { link = 'SourceWhite' })
 hl(0, 'FzfLuaLivePrompt', { link = 'SourceWhite' })
 hl(0, 'FzfLuaHelpNormal', { link = 'TrackHL' })
 
--- Telescope
-hl(0, 'TelescopePromptTitle', { link = 'gray-fg-100' })
-hl(0, 'TelescopeBorder', { link = 'gray-fg-300' })
-hl(0, 'TelescopePromptPrefix', { link = 'SourceWhite' })
-hl(0, 'TelescopePromptCounter', { link = 'gray-fg-100' })
-hl(0, 'TelescopeSelection', { fg = '#E5E5E5', bg = '#353535' })
-hl(0, 'TelescopeResultsNormal', { link = 'gray-fg-100' })
-hl(0, 'TelescopeSelectionCaret', { link = 'SourcePrompt' })
-hl(0, 'TelescopeMatching', { link = 'SourceBlue' })
-hl(0, 'TelescopeResultsTitle', { link = 'SourceBlue' })
-
 -- grapple.nvim
 hl(0, 'GrappleTitle', { link = 'gray-fg-100' })
 hl(0, 'GrappleBorder', { link = 'gray-fg-300' })

@@ -3,7 +3,7 @@ return {
     'rmagatti/auto-session',
     lazy = false,
     dependencies = {
-      'nvim-telescope/telescope.nvim',
+      'ibhagwan/fzf-lua',
     },
     config = function()
       require('auto-session').setup {
@@ -47,7 +47,7 @@ return {
         root_dir = vim.fn.stdpath 'data' .. '/sessions/', -- Root dir where sessions will be stored
         auto_save = true, -- Enables/disables auto saving session on exit
         auto_restore = true, -- Enables/disables auto restoring session on start
-        auto_create = true, -- Enables/disables auto creating new session files. Can take a function that should return true/false if a new session file should be created or not
+        auto_create = false, -- Enables/disables auto creating new session files. Can take a function that should return true/false if a new session file should be created or not
         suppressed_dirs = {
           '~/',
           '~/Projects',
@@ -78,32 +78,24 @@ return {
         log_level = 'error', -- Sets the log level of the plugin (debug, info, warn, error).
 
         session_lens = {
+          picker = 'fzf',
           mappings = {
             -- Mode can be a string or a table, e.g. {"i", "n"} for both insert and normal mode
             delete_session = { { 'i', 'n' }, '<C-x>' },
             alternate_session = { 'i', '<C-S>' },
-            copy_session = { 'i', '<C-Y>' },
+            -- copy_session = { 'i', '<C-Y>' },
           },
 
           picker_opts = {
-            -- For Telescope, you can set theme options here, see:
-            -- https://github.com/nvim-telescope/telescope.nvim/blob/master/doc/telescope.txt#L112
-            -- https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/themes.lua
+            -- For Fzf-Lua, picker_opts just turns into winopts, see:
+            -- https://github.com/ibhagwan/fzf-lua#customization
             --
-            border = false,
-            borderchars = {
-              prompt = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
-              results = { '─', '│', '─', '│', '├', '┤', '┘', '└' },
-              preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
-            },
-            layout_config = {
-              width = { padding = 0 },
-              height = { padding = 0 },
-            },
+            --  height = 0.8,
+            --  width = 0.50,
           },
 
-          -- Telescope only: If load_on_setup is false, make sure you use `:SessionSearch` to open the picker as it will initialize everything first
-          load_on_setup = false,
+          -- Telescope only: If load_on_setup is false, make sure you use `:AutoSession search` to open the picker as it will initialize everything first
+          load_on_setup = true,
         },
       }
     end,
