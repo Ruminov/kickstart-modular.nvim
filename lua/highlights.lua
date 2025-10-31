@@ -130,7 +130,7 @@ hl(0, 'MiniStatusLineModeOther', { fg = '#A5A5A5' })
 -- hl(0, 'Delimiter', { link = 'gray-fg-300' })
 
 --Indent Blankline
-vim.api.nvim_set_hl(0, '@ibl.indent.char.1', { link = 'gray-fg-300' })
+-- vim.api.nvim_set_hl(0, '@ibl.indent.char.1', { link = 'gray-fg-300' })
 
 --Trouble
 vim.api.nvim_set_hl(0, 'TroubleFilename', { fg = '#000000', bg = '#828282' })

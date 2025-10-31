@@ -1,5 +1,5 @@
- style(yazi): remove extra padding || .+\(%s\): || c059522 
  chore(auto-session): learn how to save sessions with command line || .+\(%s\): || 66f74e5 
+ style(yazi): remove extra padding || .+\(%s\): || c059522 
  fix(sot): visual bug when deleting +5 lines with d key || .+\(%s\): || 3ad049d 
  feat(todo-comments): Add warning comment keymap || .+\(%s\): || 2187529 
  feat(trouble): better keymaps to jump qflist items || .+\(%s\): || 7958e16 

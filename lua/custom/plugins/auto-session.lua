@@ -83,7 +83,7 @@ return {
             -- Mode can be a string or a table, e.g. {"i", "n"} for both insert and normal mode
             delete_session = { { 'i', 'n' }, '<C-x>' },
             alternate_session = { 'i', '<C-S>' },
-            -- copy_session = { 'i', '<C-Y>' },
+            copy_session = { 'i', '<C-Y>' },
           },
 
           picker_opts = {
